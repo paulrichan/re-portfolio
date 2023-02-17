@@ -1,0 +1,29 @@
+.container {
+   position: relative;
+   width: 10px;
+   height: 75px;
+   background: transparent;
+}
+
+.container div:nth-child(1) {
+   background: var(--accent2-color);
+   border-radius: 20px;
+   opacity: 0.5;
+   width: 100%;
+   height: 50%;
+   position: absolute;
+   bottom: 0;
+   animation-name: slide-up;
+   animation-duration: 1s;
+   animation-iteration-count: infinite;
+}
+
+@keyframes slide-up {
+   from {
+      transform: translateY(0%);
+   }
+
+   to {
+      transform: translateY(-100%);
+   }
+}
