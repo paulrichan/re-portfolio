@@ -8,14 +8,7 @@ import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import styles from './PropertyPage.module.css'
 
-export async function getServerSideProps(ctx: NextPageContext) {
-   const id = ctx.query.id
-   const propertyIP = await Properties.getById(id as string)
-
-   return { props: { propertyProp: propertyIP } }
-}
-
-function Page({ propertyProp }: { propertyProp: Property }) {
+function Page() {
    const {
       query: { id },
    } = useRouter()
@@ -28,8 +21,6 @@ function Page({ propertyProp }: { propertyProp: Property }) {
    if (isFetching) {
       return <p>Loading...</p>
    }
-
-   //    const property = propertyQuery ?? propertyProp
 
    const images = property?.attributes.images?.data?.map((img, idx) => (
       <button onClick={() => setImgIndex(idx)} className={styles.carousel_btn} key={img.id}>

@@ -7,13 +7,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import styles from './AgentPage.module.css'
 
-export async function getServerSideProps(ctx: NextPageContext) {
-   const agentIP = await Agents.getById(ctx.query.id as string)
-
-   return { props: { agentProp: agentIP } }
-}
-
-function Page({ agentIP }: { agentIP: Agent }) {
+function Page() {
    const {
       query: { id },
    } = useRouter()
@@ -25,8 +19,6 @@ function Page({ agentIP }: { agentIP: Agent }) {
    if (isFetching) {
       return <p>Loading...</p>
    }
-
-   // const agent = agentQuery ?? agentIP
 
    const tableData = agent?.attributes?.properties?.data.map((property) => {
       const dateAdded = new Date(property.attributes.publishedAt)
