@@ -1,0 +1,74 @@
+.page {
+   display: flex;
+   flex-direction: column;
+   gap: 1.5rem;
+   width: 70%;
+   margin: 0 auto;
+   padding: 0.5rem 0;
+   max-width: var(--max-width);
+}
+
+.main_img {
+   max-width: 100%;
+   max-height: 100%;
+   height: 100%;
+   border-radius: 40px;
+}
+
+.info {
+   display: flex;
+   justify-content: space-between;
+}
+
+.img_container {
+   position: relative;
+   margin: 0 auto;
+   max-width: 100%;
+}
+
+.hero_container {
+   height: 40vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   overflow: hidden;
+   border-radius: 40px;
+}
+
+.carousel {
+   display: flex;
+   overflow-x: scroll;
+}
+
+.carousel_img {
+   height: 80px;
+}
+
+.carousel_btn {
+   width: auto;
+   /* min-width: 200px; */
+}
+
+.grid {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   gap: 60px;
+}
+
+.grid > div {
+   align-items: center;
+   background: var(--secondary-bg-color);
+   border-radius: 20px;
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   justify-content: center;
+   margin: 0 auto;
+   padding: 1rem 0;
+
+   width: 100%;
+}
+
+.grid > div > h3 {
+   font-weight: 900;
+}

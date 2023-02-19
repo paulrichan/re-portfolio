@@ -1,25 +1,34 @@
-import { Agents } from '@/utils/strapiApi'
+import NavBar from '@/components/NavBar'
+import { api } from '@/utils/strapiApi'
 import { useQuery } from '@tanstack/react-query'
 import Head from 'next/head'
 import Link from 'next/link'
-import React from 'react'
-import styles from './SearchPage.module.css'
+import React, { ChangeEvent, useState } from 'react'
+import styles from '@/styles/SearchPage.module.css'
 
 function Page() {
-   const { data: allAgents, isFetching } = useQuery({
+   const [name, setName] = useState('')
+   const { data: allAgents } = useQuery({
       queryKey: ['agents'],
-      queryFn: () => Agents.getAll(),
+      queryFn: () => api.agents.getAll(),
    })
-   const tableData = allAgents?.map((agent) => (
-      <tr key={agent.id}>
-         <td>
-            <Link href={`/agent/${agent.id}`}>{agent.attributes.name}</Link>
-         </td>
-         <td>{agent.attributes.email}</td>
-         <td>{agent.attributes.desc}</td>
-         <td>{agent.attributes.properties.data.length}</td>
-      </tr>
-   ))
+   const tableData = allAgents
+      ?.filter((agent) => agent.attributes.name.toLowerCase().includes(name.toLowerCase()))
+      ?.map((agent) => (
+         <tr key={agent.id}>
+            <td>
+               <Link href={`/agent/${agent.id}`}>{agent.attributes.name}</Link>
+            </td>
+            <td>{agent.attributes.email}</td>
+            <td>{agent.attributes.desc}</td>
+            <td>{agent.attributes.properties.data.length}</td>
+         </tr>
+      ))
+
+   const handleNameSearch = (e: React.FormEvent<HTMLInputElement>) => {
+      const name = e.currentTarget.value
+      setName(name)
+   }
 
    return (
       <>
@@ -28,9 +37,13 @@ function Page() {
             <meta name='description' content='Search for an agent.' />
          </Head>
 
-         <main className={styles.page}>
-            <h2>Search by name</h2>
-            <input />
+         <NavBar navTo='' btnText='Home' />
+
+         <main className='page'>
+            <div className={styles.search}>
+               <h3>Search by name</h3>
+               <input value={name} onChange={handleNameSearch} />
+            </div>
             <table>
                <thead>
                   <tr>

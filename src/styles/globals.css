@@ -2,10 +2,13 @@
    --text-color: #2a2a2a;
 
    --primary-bg-color: #f9f9f9;
+   --secondary-bg-color: #f1f1f1;
    --bg-dark: #053742;
    --accent1-color: #3ab0ff;
    --accent2-color: #ffb562;
    --accent3-color: #f87474;
+
+   --max-width: 1200px;
 }
 
 * {
@@ -23,25 +26,37 @@ body {
 }
 
 nav {
-   align-items: center;
    background: rgb(255, 255, 255, 0.8);
-   display: flex;
-   justify-content: space-between;
    padding: 0.6rem 1rem;
    position: sticky;
    top: 0;
+   z-index: 100;
+   --webkit-backdrop-filter: blur(10px);
+   backdrop-filter: blur(10px);
+}
+
+.container {
+   align-items: center;
+   display: flex;
+   justify-content: space-between;
+   width: 100%;
+   margin: 0 auto;
+   max-width: var(--max-width);
 }
 
 .nav_link {
    background: var(--accent3-color);
    padding: 0.5rem 1rem;
+   display: flex;
+   place-items: center;
    border-radius: 10px;
    color: #fff;
    font-weight: bold;
    text-decoration: none;
 }
 
-input {
+input,
+textarea {
    all: unset;
    background: rgb(0, 0, 0, 0.1);
    border: 1px solid transparent;
@@ -85,4 +100,26 @@ tbody > tr:nth-child(odd) {
 
 tbody > tr:hover {
    background: rgb(0, 0, 0, 0.045);
+}
+
+.page {
+   display: flex;
+   flex-direction: column;
+   gap: 1.5rem;
+   /* width: 70%; */
+   margin: 0 auto;
+   padding: 0.5rem 1rem;
+   max-width: var(--max-width);
+}
+
+.signin_btn {
+   all: unset;
+   color: var(--accent3-color);
+   font-weight: bold;
+   border-radius: 5px;
+   padding: 0.5rem 1rem;
+}
+
+.signin_btn:hover {
+   background: rgb(248, 116, 116, 0.1);
 }

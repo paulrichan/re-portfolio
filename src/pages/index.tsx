@@ -3,6 +3,8 @@ import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
 import ScrollIndicator from '@/components/ScrollIndicator'
 import Link from 'next/link'
+import NavBar from '@/components/NavBar'
+import { IconUserSearch } from '@tabler/icons-react'
 
 export default function Home() {
    return (
@@ -14,13 +16,7 @@ export default function Home() {
             <link rel='icon' href='/favicon.ico' />
          </Head>
          <main className={`${styles.main}`}>
-            <nav>
-               <h1>Logo</h1>
-
-               <Link className='nav_link' href='/search'>
-                  Search
-               </Link>
-            </nav>
+            <NavBar navTo='search' btnText={<IconUserSearch />} />
 
             <section className={styles.hero}>
                <div className={styles.content}>

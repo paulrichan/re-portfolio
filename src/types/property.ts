@@ -7,6 +7,10 @@ export type Property = {
       address: string
       price: string
       desc: string
+      beds: number
+      baths: number
+      hoa: number
+      spots: number
       publishedAt: string
       agent: {
          data: Agent
