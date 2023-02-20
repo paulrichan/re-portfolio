@@ -1,3 +1,9 @@
 .search > input {
    width: 25%;
 }
+
+@media (max-width: 768px) {
+   .search > input {
+      width: 100%;
+   }
+}

@@ -10,7 +10,7 @@ function Page() {
    const [name, setName] = useState('')
    const { data: allAgents } = useQuery({
       queryKey: ['agents'],
-      queryFn: () => api.agents.getAll(),
+      queryFn: async () => await api.agents.getAll(),
    })
    const tableData = allAgents
       ?.filter((agent) => agent.attributes.name.toLowerCase().includes(name.toLowerCase()))
@@ -19,8 +19,12 @@ function Page() {
             <td>
                <Link href={`/agent/${agent.id}`}>{agent.attributes.name}</Link>
             </td>
-            <td>{agent.attributes.email}</td>
-            <td>{agent.attributes.desc}</td>
+            <td>
+               <a className={styles.email_link} href={`mailto:${agent.attributes.email}`}>
+                  Send Email
+               </a>
+            </td>
+            <td style={{ width: '40%' }}>{agent.attributes.desc}</td>
             <td>{agent.attributes.properties.data.length}</td>
          </tr>
       ))
