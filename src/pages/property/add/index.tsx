@@ -1,9 +1,12 @@
 import NavBar from '@/components/NavBar'
 import { api } from '@/utils/strapiApi'
 import { useQuery } from '@tanstack/react-query'
+import { useRouter } from 'next/router'
 import React, { useState } from 'react'
+import styles from '@/styles/AddProperty.module.css'
 
 function Page() {
+   const router = useRouter()
    const [address, setAddress] = useState('')
    const [desc, setDesc] = useState('')
    const [price, setPrice] = useState(0)
@@ -38,11 +41,23 @@ function Page() {
       setImages(newImages)
    }
 
+   async function handleSubmitProperty() {
+      try {
+         const propertyData = await api.properties.create(data, images, agentId)
+
+         if (propertyData) {
+            router.push('/property/' + propertyData.id)
+         }
+      } catch (error) {
+         console.error(error)
+      }
+   }
+
    const imgInputs = images.map((img, idx) => {
       return (
-         <div key={idx} style={{ display: 'flex', gap: '5px' }}>
-            <button style={{ width: '50px' }} onClick={() => handleDeleteImgInput(idx)}>
-               -
+         <div className={styles.image_input} key={idx}>
+            <button className={styles.subtract_btn} onClick={() => handleDeleteImgInput(idx)}>
+               Delete
             </button>
             <input type='text' value={img ?? ''} onChange={(e) => handleOnChangeImg(idx, e.currentTarget.value)} />
          </div>
@@ -57,12 +72,14 @@ function Page() {
 
             <label>Images</label>
             {imgInputs}
-            <button onClick={() => setImages((prev) => [...prev, ''])}>Add more</button>
+            <button className={styles.add_btn} onClick={() => setImages((prev) => [...prev, ''])}>
+               Add more images
+            </button>
 
             <label>Address</label>
             <input type='text' onChange={(e) => setAddress(e.currentTarget.value)} />
             <label>Description</label>
-            <input type='text' onChange={(e) => setDesc(e.currentTarget.value)} />
+            <textarea onChange={(e) => setDesc(e.currentTarget.value)} />
             <label>Price</label>
             <input type='number' onChange={(e) => setPrice(Number(e.currentTarget.value))} />
             <label>Beds</label>
@@ -73,7 +90,9 @@ function Page() {
             <input type='number' onChange={(e) => setHoa(Number(e.currentTarget.value))} />
             <label>Covered Spots</label>
             <input type='number' onChange={(e) => setSpots(Number(e.currentTarget.value))} />
-            <button onClick={() => api.properties.create(data, images, agentId)}>Submit</button>
+            <button className={styles.submit_btn} onClick={handleSubmitProperty}>
+               Submit
+            </button>
          </div>
       </>
    )

@@ -1,0 +1,44 @@
+.image_input {
+   align-items: center;
+   display: flex;
+   gap: 10px;
+}
+
+.subtract_btn {
+   width: 50px;
+   height: 100%;
+   border: none;
+   background: rgb(248, 116, 116, 0.2);
+   font-weight: bold;
+   padding: 0.3rem;
+   border-radius: 5px;
+   color: rgb(248, 116, 116);
+   cursor: pointer;
+}
+
+.add_btn {
+   border: none;
+   background: rgb(58, 176, 255, 0.2);
+   color: rgb(58, 176, 255);
+   padding: 0.5rem;
+   width: 50%;
+   align-self: center;
+   border-radius: 5px;
+   cursor: pointer;
+}
+
+.submit_btn {
+   border: none;
+   background: rgb(58, 176, 255, 0.2);
+   color: rgb(58, 176, 255);
+   padding: 0.5rem;
+   width: 50%;
+   align-self: center;
+   border-radius: 5px;
+   cursor: pointer;
+}
+
+.submit_btn:hover {
+   background: rgb(58, 176, 255);
+   color: white;
+}

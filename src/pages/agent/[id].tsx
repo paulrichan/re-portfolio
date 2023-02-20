@@ -10,17 +10,20 @@ import { signOut, useSession } from 'next-auth/react'
 function Page() {
    const {
       query: { id },
+      replace,
       isReady,
    } = useRouter()
-   const { data: agent } = useQuery({
+   const { data: agent, error } = useQuery({
       queryKey: ['agentById'],
       queryFn: () => api.agents.getById(id as string),
       enabled: isReady,
    })
    const { data: userData } = useSession()
-   const userEmail = userData?.user?.email
-   const agentEmail = agent?.attributes.email
-   const isSignedInUserProfile = userEmail === agentEmail
+   const isSignedInUserProfile = userData?.user?.email === agent?.attributes?.email
+
+   if (error) {
+      replace('/agent/nopage')
+   }
 
    if (!agent) {
       return <p>Loading...</p>
@@ -35,12 +38,20 @@ function Page() {
             <td>
                <Link href={`/property/${property.id}`}>{property.attributes.address}</Link>
             </td>
-            <td>{property.attributes.desc}</td>
+            <td>{truncateText(property.attributes.desc)}</td>
             <td>${Number(property.attributes.price).toLocaleString()}</td>
             <td>{dateAdded.toLocaleDateString()}</td>
          </tr>
       )
    })
+
+   function truncateText(text: string) {
+      const limit = 200
+      if (text.length > limit) {
+         return text.substring(0, limit) + '...'
+      }
+      return text
+   }
 
    return (
       <>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '@/styles/RegisterPage.module.css'
 import NavBar from '@/components/NavBar'
 import { useSession } from 'next-auth/react'
@@ -7,10 +7,16 @@ import { useRouter } from 'next/router'
 
 function Page() {
    const router = useRouter()
-   const { data: session } = useSession()
-   const [name, setName] = useState(session?.user?.name ?? '')
+   const { data: session, status } = useSession()
+   const [name, setName] = useState(session?.user?.name)
    const [desc, setDesc] = useState('')
    const [submitting, setSubmitting] = useState(false)
+
+   useEffect(() => {
+      if (session) {
+         setName(session?.user?.name)
+      }
+   }, [session])
 
    const agentData = JSON.stringify({
       data: {
@@ -40,13 +46,13 @@ function Page() {
    return (
       <>
          <NavBar navTo='' btnText='Home' />
-         <main className={styles.page}>
+         <main className='page'>
             <div className={styles.container}>
                <h2>Register as Agent</h2>
                <p>This will allow you to post new properties.</p>
 
                <label className={styles.input_label}>Name</label>
-               <input value={name} onChange={(e) => setName(e.currentTarget.value)} type='text' />
+               <input value={name ?? ''} onChange={(e) => setName(e.currentTarget.value)} type='text' />
                <label className={styles.input_label}>Description</label>
                <textarea
                   onChange={(e) => setDesc(e.currentTarget.value)}

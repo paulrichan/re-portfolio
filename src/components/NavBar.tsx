@@ -16,6 +16,7 @@ function NavBar(props: NavBarProps) {
    const { data: userData } = useQuery({
       queryKey: ['user'],
       queryFn: () => api.agents.getByEmail(session?.user?.email ?? ''),
+      enabled: isAuthenticated,
    })
    const id = userData?.data[0]?.id
    const isAuthenticatedWithNoPage = isAuthenticated && !id

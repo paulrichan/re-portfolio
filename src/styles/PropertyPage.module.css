@@ -72,3 +72,20 @@
 .grid > div > h3 {
    font-weight: 900;
 }
+
+.delete {
+   border: none;
+   background: rgb(248, 116, 116, 0.2);
+   font-weight: bold;
+   color: rgb(248, 116, 116);
+   width: 25%;
+   align-self: center;
+   padding: 1rem 0;
+   border-radius: 10px;
+}
+
+.delete:hover {
+   background: rgb(248, 116, 116, 0.7);
+   color: white;
+   cursor: pointer;
+}

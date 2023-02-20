@@ -57,7 +57,14 @@ class PropertiesApi {
       }
       const dataWithRelations = { data: { images: { connect: relationIds }, agent: { connect: [agentId] }, ...data } }
 
-      await postApi({ collection: 'properties', data: dataWithRelations })
+      const res = await postApi({ collection: 'properties', data: dataWithRelations })
+
+      return res.data
+   }
+   async delete(id: number) {
+      const res = await http.delete('/properties/' + id)
+      const status = res.status
+      return status
    }
 }
 
