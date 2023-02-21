@@ -24,7 +24,7 @@ function Page() {
                   Send Email
                </a>
             </td>
-            <td style={{ width: '40%' }}>{agent.attributes.desc}</td>
+            <td style={{ width: '40%' }}>{truncateText(agent.attributes.desc)}</td>
             <td>{agent.attributes.properties.data.length}</td>
          </tr>
       ))
@@ -32,6 +32,14 @@ function Page() {
    const handleNameSearch = (e: React.FormEvent<HTMLInputElement>) => {
       const name = e.currentTarget.value
       setName(name)
+   }
+
+   function truncateText(text: string) {
+      const maxLength = 100
+      if (text.length > maxLength) {
+         return text.substring(0, maxLength) + '...'
+      }
+      return text
    }
 
    return (

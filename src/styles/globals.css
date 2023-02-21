@@ -35,6 +35,12 @@ nav {
    backdrop-filter: blur(10px);
 }
 
+.logo-link {
+   position: relative;
+   height: 50px;
+   width: 50px;
+}
+
 .container {
    align-items: center;
    display: flex;

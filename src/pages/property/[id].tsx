@@ -60,13 +60,11 @@ function Page() {
                </button>
             )}
             <div className={styles.hero_container}>
-               <div className={styles.img_container}>
-                  <img
-                     className={styles.main_img}
-                     src={property?.attributes?.images?.data[imgIndex]?.attributes?.src ?? ''}
-                     alt='main prop img'
-                  />
-               </div>
+               <img
+                  className={styles.main_img}
+                  src={property?.attributes?.images?.data[imgIndex]?.attributes?.src ?? ''}
+                  alt='main prop img'
+               />
             </div>
             <div className={styles.carousel}>{images}</div>
 

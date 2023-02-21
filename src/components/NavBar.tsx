@@ -2,6 +2,7 @@ import { api } from '@/utils/strapiApi'
 import { IconUserCircle, IconUserSearch } from '@tabler/icons-react'
 import { useQuery } from '@tanstack/react-query'
 import { signIn, signOut, useSession } from 'next-auth/react'
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
@@ -24,7 +25,9 @@ function NavBar(props: NavBarProps) {
    return (
       <nav>
          <div className='container'>
-            <h1>Logo</h1>
+            <Link className='logo-link' href='/'>
+               <Image src='/REP-logo.svg' alt='logo' fill />
+            </Link>
 
             {/* {isAuthenticated && <Link href='/register'>Register as Agent</Link>} */}
 
